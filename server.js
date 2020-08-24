@@ -1,6 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
+const cors = require('cors')
+require('dotenv').config()
 
 const app = express();
 
@@ -8,6 +10,7 @@ const PORT = process.env.PORT || 3001;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(cors());
 
 app.use(express.static("client/build"));
 
@@ -22,7 +25,7 @@ app.get("*", (req, res) => {
 });
 
 mongoose
-  .connect(process.env.MONGODB_URI || "mongodb://localhost/mern-starter", {
+  .connect(process.env.ATLAS_URI || "mongodb://localhost/mern-starter", {
     useUnifiedTopology: true,
     useNewUrlParser: true,
   })
